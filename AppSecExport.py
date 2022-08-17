@@ -21,6 +21,8 @@ def main(argv):
         responseJson = response.json()
         securityProblems = responseJson["securityProblems"]
         for problem in securityProblems:
+            if "cveIds" not in problem:
+                problem["cveIds"] = []
             data.append([
                 problem["status"],
                 problem["displayId"],
@@ -86,6 +88,8 @@ def main(argv):
         print('No problems fetched')
         sys.exit()
     for problem in securityProblems:
+        if "cveIds" not in problem:
+            problem["cveIds"] = []
         data.append([
             problem["status"],
             problem["displayId"],
